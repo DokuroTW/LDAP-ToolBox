@@ -1,0 +1,14 @@
+# 根節點 o=school
+dn: o=school,dc=ldap,dc=com
+objectClass: organization
+o: school
+
+# Group
+dn: ou=group,o=school,dc=ldap,dc=com
+objectClass: organizationalUnit
+ou: group
+
+# Person 
+dn: ou=person,o=school,dc=ldap,dc=com
+objectClass: organizationalUnit
+ou: person

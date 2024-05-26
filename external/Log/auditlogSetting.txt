@@ -1,0 +1,11 @@
+sudo mkdir /var/log/ldap
+sudo touch /var/log/ldap/auditlog.ldif
+sudo chown openldap:openldap /var/log/ldap
+sudo chmod 700 /var/log/ldap
+sudo chown openldap:openldap /var/log/ldap/auditlog.ldif
+sudo nano /etc/apparmor.d/usr.sbin.slapd
+/var/log/ldap/ r,
+/var/log/ldap/* rw,
+sudo apparmor_parser -r /etc/apparmor.d/usr.sbin.slapd
+sudo systemctl restart slapd
+sudo tail -f /var/log/ldap/auditlog.ldif

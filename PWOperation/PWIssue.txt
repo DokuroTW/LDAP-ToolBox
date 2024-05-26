@@ -1,0 +1,28 @@
+# 初始化密碼
+cat << EOF | ldapadd -x -D "cn=admin,dc=ldap,dc=com" -H ldapi:/// -W
+dn: cn=teacherA,ou=person,o=school,dc=ldap,dc=com
+changetype: modify
+replace: pwdReset
+pwdReset: TRUE
+EOF
+
+# 密碼過期處裡方法
+cat << EOF | ldapmodfiy -x -D cn=config -H ldapi:/// -W
+dn: cn=teacherA,ou=person,o=school,dc=ldap,dc=com
+changetype: modify
+delete: userpassword
+userpassword: 12345678
+-
+add: userpassword
+userpassword: 123456789
+EOF
+
+# 密碼解鎖步驟
+ldapwhoami -x -D "cn=admin,dc=ldap,dc=com" -W -e ppolicy -v
+ldapsearch -x -b "o=school,dc=ldap,dc=com" "(cn=teacherA)" * +
+
+cat << EOF | ldapadd -x -H ldapi:/// -D "cn=admin,dc=ldap,dc=com" -W
+dn: cn=teacherA,ou=person,o=school,dc=ldap,dc=com
+changetype: modify
+delete: pwdAccountLockedTime
+EOF

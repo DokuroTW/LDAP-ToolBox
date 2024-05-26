@@ -1,0 +1,4 @@
+dn: cn=teacherA,ou=person,o=school,dc=ldap,dc=com
+changetype: modify
+add: pwdPolicySubentry
+pwdPolicySubentry: cn=default,ou=policies,dc=ldap,dc=com

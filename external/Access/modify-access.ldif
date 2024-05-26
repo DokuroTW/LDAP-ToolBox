@@ -1,0 +1,11 @@
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn="cn=admin,dc=ldap,dc=com" manage
+olcAccess: {1}to dn.subtree="ou=person,dc=ldap,dc=com" by group.exact="cn=Teacher,ou=group,dc=ldap,dc=com" write by * break
+olcAccess: {2}to dn.subtree="ou=person,dc=ldap,dc=com" by group.exact="cn=Employee,ou=group,dc=ldap,dc=com" read by * break
+olcAccess: {3}to dn.subtree="ou=person,dc=ldap,dc=com" by self read
+# 管理员（Admin）：拥有对所有内容的完全访问权限
+# 教师（Teacher）：比员工和学生拥有更高的权限，可能需要读写对 ou=person 下所有条目的权限
+# 员工（Employee）：具有对学生信息有限的读取权限
+# 学生（Student）：具有对自己信息的读取权限

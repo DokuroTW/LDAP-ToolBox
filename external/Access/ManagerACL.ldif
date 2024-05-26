@@ -1,0 +1,7 @@
+# 设置对整个LDAP根目录的访问控制
+dn: o=school,dc=ldap,dc=com
+changetype: modify
+add: acl
+acl: access to *
+  by dn.base="cn=admin,dc=ldap,dc=com" write
+  by * read

@@ -1,0 +1,51 @@
+dn: ou=policies,dc=ldap,dc=com
+objectClass: organizationalUnit
+ou: policies
+
+dn: cn=default,ou=policies,dc=ldap,dc=com
+objectClass: person
+objectClass: pwdPolicy
+cn: default
+sn: Default default
+pwdAttribute: userPassword
+#----------------------密碼修改相關----------------------#
+# 大寫字母最小數量
+#pwdUcredit: 2
+# 小寫字母最小數量
+#pwdLcredit: 2
+# 數字字母最小數量
+#pwdDcredit: 5
+# 特殊字元最小數量
+#pwdOcredit: 3
+# 使用者修改密碼最短長度 
+pwdMinLength: 8
+# 0-2級密碼質量檢查
+pwdCheckQuality: 2
+# 開啟密碼歷史紀錄，用於保證不能和之前設定的密碼相同 
+pwdInHistory: 5
+# 允許使用者修該自己的密碼
+pwdAllowUserChange: TRUE
+# 登入後提示修改密碼
+pwdMustChange: FALSE
+# 允許使用者修該密碼(提示修改pwdMustChange一起使用)
+pwdSafeModify: FALSE
+
+#----------------------密碼次數相關----------------------#
+# 超過定義次數，帳號將封鎖
+pwdLockout: TRUE
+# 設定帳號登入最多次數，超過將被封鎖
+pwdLockoutDuration: 30
+# 密碼最大失效次數，超過將封鎖
+pwdMaxFailure: 3
+
+#----------------------密碼時間相關----------------------#
+# 密碼過期前警告天數
+pwdExpireWarning: 604800
+# 密碼有效期限，到期強制必須修改
+pwdMaxAge: 7776002
+# 密碼過期後不能登入的天數，0代表禁止登入
+pwdGraceAuthNLimit: 0
+# 密碼失敗後恢復時間 
+pwdFailureCountInterval: 0
+
+
